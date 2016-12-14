@@ -205,7 +205,7 @@ class Exception extends Base implements ExceptionControllerInterface
         $filePath = $exception ? $exception->getFile() : null;
         $lineNumber = $exception ? $exception->getLine() : null;
 
-        if ($filePath && $lineNumber) {
+        if ($filePath && $lineNumber && strpos($filePath, '://') === false) {
             $phpFile = file($filePath) ?: [];
             $snippet = implode('', array_slice($phpFile, max(0, $lineNumber - 6), 11));
         } else {
